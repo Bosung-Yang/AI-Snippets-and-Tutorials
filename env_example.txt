@@ -1,0 +1,15 @@
+# API Keys
+OPENAI_API_KEY=your_openai_api_key_here
+HUGGINGFACE_API_KEY=your_huggingface_api_key_here
+
+# Optional configurations
+OPENAI_MODEL=gpt-3.5-turbo
+HUGGINGFACE_MODEL=bert-base-uncased
+API_TIMEOUT=30
+
+# Database (if needed)
+DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+
+# Other services
+GOOGLE_API_KEY=your_google_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here 
