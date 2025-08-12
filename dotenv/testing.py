@@ -1,4 +1,18 @@
-import openai
+from openai import OpenAI
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
+
+# OpenAI 클라이언트 생성
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+# GPT-3.5-turbo에 메시지 보내는 예시
+response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "user", "content": "안녕하세요! 테스트 메시지입니다."}
+    ]
+)
+
+print(response.choices[0].message.content)
