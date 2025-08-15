@@ -1,14 +1,29 @@
-import langchain
-import transformers
-import torch
+import getpass
 import os
+import dotenv
+from dotenv import load_dotenv
 
-model_id = "google/gemma-3-4b-it"
+dotenv.load_dotenv('../dotenv/.env')
 
-llm = langchain.llm.pipeline.LLM(
-    model=model_id,
-    torch_dtype=torch.bfloat16,
-    device_map="auto",
-)
+from langchain.chat_models import init_chat_model
+model = init_chat_model("gpt-4o-mini", model_provider="openai")
 
-llm.invoke("Hello, how are you?")
+from langchain_core.messages import HumanMessage, SystemMessage
+messages = [
+    SystemMessage("Translate the following from English into Italian"),
+    HumanMessage("hi!"),
+]
+from langchain_core.prompts import PromptTemplate
+
+templete = PromptTemplate.from_template("my name is {nickname}")
+chain = templete | model
+# 
+
+from langchain_core.output_parsers import StrOutputParser
+
+output_parser = StrOutputParser()
+chain = templete | model | output_parser
+
+response = chain.invoke({"nickname": "John"})
+
+print(response)
